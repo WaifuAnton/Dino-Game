@@ -5,8 +5,9 @@ using UnityEngine;
 public class DinoMovement : MonoBehaviour
 {
     public float speed = 10;
+    public float jumpForce = 10;
     Rigidbody2D rb2d;
-    Vector2 move;
+    Vector2 move, jump;
     RaycastHit2D[] hitBuffer = new RaycastHit2D[1];
     const float minMoveDistance = 0.4f;
 
@@ -15,6 +16,7 @@ public class DinoMovement : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         move = new Vector2(speed, 0);
+        jump = new Vector2(0, jumpForce);
     }
 
     // Update is called once per frame
@@ -25,6 +27,11 @@ public class DinoMovement : MonoBehaviour
         if (distance < minMoveDistance)
         {
             rb2d.gravityScale = 0;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rb2d.gravityScale = 1;
+                rb2d.AddForce(jump, ForceMode2D.Impulse);
+            }
             rb2d.AddForce(move, ForceMode2D.Force);
         }
         else
