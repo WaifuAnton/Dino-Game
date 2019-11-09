@@ -9,6 +9,7 @@ public class DinoMovement : MonoBehaviour
     Rigidbody2D rb2d;
     Vector2 move, jump;
     RaycastHit2D[] hitBuffer = new RaycastHit2D[1];
+    //Collider2D collider;
     const float minMoveDistance = 0.4f;
 
     // Start is called before the first frame update
@@ -27,7 +28,7 @@ public class DinoMovement : MonoBehaviour
         if (distance < minMoveDistance)
         {
             rb2d.gravityScale = 0;
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 rb2d.gravityScale = 1;
                 rb2d.AddForce(jump, ForceMode2D.Impulse);
